@@ -42,12 +42,12 @@ fn hex() {
 // \d{5}(?:[-\s]\d{4})?
 fn us_zip_code() {
     let separator = is_char('-').and(whitespace()).as_character_class();
-    let plus_four = separator.and(digit().repeated().exactly(4)).or_not();
+    let plus_four = separator.and(digit().repeated().exactly(4));
 
     let regex = digit()
         .repeated()
         .exactly(5)
-        .and(plus_four.grouped_non_capturing())
+        .and(plus_four.grouped_non_capturing().or_not())
         .build();
     println!("{regex}");
 }
